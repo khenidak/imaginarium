@@ -1,24 +1,13 @@
 #!/bin/bash
 
-# Append to history don't overwrite it
-export HISTCONTROL=ignoredups:erasedups  # no duplicate entries
-export HISTSIZE=100000                   # big big history
-export HISTFILESIZE=100000               # big big history
-shopt -s histappend                      
-
-# load ssh agent
-eval $(ssh-agent)
-ssh-add ~/keys/xclusters #load xclusters key by default
-
+set -e 
+set -o pipefail
 
 # Stop and rm containers 
 nuke-docker-ps () { docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q) ;}
 nuke-docker-img () { docker rmi -f $(docker images -q) ;}
 iDev(){  tmux attach -t kal || tmux new -s kal; }
 sDev(){  tmux attach -t "$1" || tmux new -s "$1" ;}
-# configure PS1 the right way
-export PS1="${PS1:0:($((${#PS1}-3)))}\n$ "
-
 
 #python -c 'import sys, yaml, json; yaml.safe_dump(json.load(sys.stdin), sys.stdout, default_flow_style=False)' < vector_endpoints.json > vector_endpoints.yaml
 
@@ -62,15 +51,4 @@ function current-tmux-session-name()
 function tmxv() { tmux split-window -h -c "$(pwd)" "$* ;/bin/bash";}
 function tmxh() { tmux split-window -v -c "$(pwd)" "$*; /bin/bash";}
 function tmxt() { tmux new-window -n "$1" -c "$(pwd)" "${*:2} ;/bin/bash";}
-# switch kubectl config
-function kubeswitch()
-{
-	local configFile="$1"
-	configFile="${HOME}/.kube/${configFile}"
-	if [ -f $configFile ]; then
-			export KUBECONFIG="${configFile}"
-			echo "switched to ${KUBECONFIG}"
-  else
-			echo "File [$configFile] does not exist.."
-	fi
-}
+
