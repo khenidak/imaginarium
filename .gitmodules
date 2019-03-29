@@ -1,0 +1,30 @@
+[submodule "box/.vim/bundles/ctrlp.vim"]
+	path = box/.vim/bundles/ctrlp.vim
+	url = https://github.com/ctrlpvim/ctrlp.vim.git
+[submodule "box/.vim/bundles/nerdtree"]
+	path = box/.vim/bundles/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
+[submodule "box/.vim/bundles/tagbar"]
+	path = box/.vim/bundles/tagbar
+	url = https://github.com/majutsushi/tagbar.git
+[submodule "box/.vim/bundles/vim-go"]
+	path = box/.vim/bundles/vim-go
+	url = https://github.com/fatih/vim-go.git
+[submodule "box/.vim/bundles/vim-nerdtree-tabs"]
+	path = box/.vim/bundles/vim-nerdtree-tabs
+	url = https://github.com/jistr/vim-nerdtree-tabs.git
+[submodule "box/.vim/bundles/syntastic"]
+	path = box/.vim/bundles/syntastic
+	url = https://github.com/vim-syntastic/syntastic.git
+[submodule "box/.vim/bundles/YouCompleteMe"]
+	path = box/.vim/bundles/YouCompleteMe
+	url = https://github.com/Valloric/YouCompleteMe.git
+[submodule "box/.vim/bundles/lightline.vim"]
+	path = box/.vim/bundles/lightline.vim
+	url = https://github.com/itchyny/lightline.vim
+[submodule "box/.vim/bundles/python-mode"]
+	path = box/.vim/bundles/python-mode
+	url = https://github.com/klen/python-mode.git
+[submodule "box/.vim/bundles/vim-flake8"]
+	path = box/.vim/bundles/vim-flake8
+	url = https://github.com/nvie/vim-flake8.git

@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: jumpbox-p
+spec:
+# Modify the below for node selection
+#  nodeSelector:
+#    kubernetes.io/hostname: <<agent name here>>
+  hostNetwork: true 
+  containers: 
+    - name: jbox
+      image: jumpbox
+      command: ["/bin/bash", "-c", "while true; do sleep 25; done"]
+      securityContext: 
+        privileged: true
+      volumeMounts:
+      - mountPath: /hostRoot
+        name: hostRoot
+  volumes:
+  - name: hostRoot
+    hostPath:
+      path: /
