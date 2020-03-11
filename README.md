@@ -1,6 +1,6 @@
 # imaginarium
 
-This is my development machine.
+This is my development machine. be aware that this is *mine* and what works for me does not necessarily work for you.
 
 ## H/W Configuration
 
@@ -23,29 +23,46 @@ they were captured with
 to install them run
 ` xargs -n 1 -I{} sudo apt install -y {} < <( cat ./imaginarium/installed-packages)`
 
-
 ## configuring the box
 
-### tmux:
+### bash profile
+load up additional bash setting by adding this to your bashrc
+`source ./imaginarium/box/.bashrc__extra` 
+
+### tmux
 link tmux configuration file to what is in the imaginarium
 `ln -s ./imaginarium/box/.tmux.conf ./.tmux.conf`
 
-### vi:
+### vi
 link the configuration file:
 `ln -s ./imaginarium/box/.vimrc ./.vimrc`
 
 link the plugin/theme director
 `ln -s ./imaginarium/box/.vim ./vim`
 
-
-
+build YouCompleteMe
+```
+cd ~/.vim/bundles/YouCompleteMe/
+python3 install.py --all
+```
+> check https://github.com/ycm-core/YouCompleteMe for more details about YCM
 ### additional software packages: nodejs etc
 
-- nodejs
-I use a more modern `v 10.x` nodejs (for typescript). Follow instruction here: https://github.com/nodesource/distributions/blob/master/README.md
+-**nodejs**: I use a more modern `v 10.x` nodejs (for typescript). Follow instruction here: https://github.com/nodesource/distributions/blob/master/README.md
 
-- typescript
-`do not install via apt` follow https://www.typescriptlang.org/docs/tutorial.html. or just run(after nodeks is installed) `npm install -g typescript`
+- **typescript**: `do not install via apt` follow https://www.typescriptlang.org/docs/tutorial.html. or just run(after nodeks is installed) `npm install -g typescript`
 
-- tool chain stuff 
-rushjs `npm install -g @microsoft/rush` 
+- **tool chain stuff**: rushjs `npm install -g @microsoft/rush` 
+
+## additional software: azure cli
+follow: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-apt?view=azure-cli-latest
+
+
+**TODO: MORE ON CONFIG **
+## workflow
+my day starts with 
+
+1. `sDev xyz` where xyz is whatever i am working in. That starts (or connects to existing) tmux session. `iDev` starts a default profile named `kal` where core stuff are always there.
+2. the session is kept with multiple tabs panes etc with code (vi) running.
+
+** TODO nested virtual machines  
