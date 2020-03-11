@@ -1,7 +1,11 @@
 set encoding=utf-8
 scriptencoding utf-8
 
-execute pathogen#infect()
+" we are loading from a different path.
+" for some odd reason pathogen refuses to follow symbolic links
+set runtimepath+=~/home/khenidak/imaginarium/box/.vim/bundles
+execute pathogen#infect('bundles/{}')
+
 syntax on
 filetype plugin indent on
 
