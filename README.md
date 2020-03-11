@@ -12,7 +12,78 @@ Azure Ds series v3 (v3 to support nested virtualization). With the following con
 
 > Large disks are used to get higher i/o quotas 
 
-<<TODO MOUNT UNIT FILES>>
+### mounting disks
+create directories
+
+
+> note the below redirect home to one of the data disks.
+
+```
+sudo -s
+mkdir /opt/code
+mkdir /opt/data
+mkdir /opt/code/home/khenidak
+
+# own them
+chown -R khenidak:khenidak /opt/code
+chown -R khenidak:khenidak /opt/data
+```
+
+create the following files
+
+```
+#/etc/systemd/system/opt-data.mount
+[Unit]
+Description=mount data disk
+
+[Mount]
+What=/dev/sdd
+Where=/opt/data
+Type=ext4
+
+[Install]
+WantedBy=multi-user.target
+```
+
+```
+#/etc/systemd/system/opt-code.mount
+[Unit]
+Description=mount code disk
+
+[Mount]
+What=/dev/sdc
+Where=/opt/code
+Type=ext4
+
+[Install]
+WantedBy=multi-user.target
+```
+Change user name as needed, don't forget to change the directory in `/opt`
+```
+/etc/systemd/system/opt-code-home-khenidak.mount
+[Unit]
+Description=bind home
+After=opt-code.mount
+[Mount]
+What=/home/khenidak
+Where=/opt/code/home/khenidak
+Type=none
+Options=bind
+
+[Install]
+WantedBy=multi-user.target
+```
+enable and start the units
+
+```
+systemctl enable opt-data.mount
+systemctl enable opt-code.mount
+systemctl enable opt-code-home-khenidak.mount
+
+systemctl start opt-data.mount
+systemctl start opt-code.mount
+systemctl start opt-code-home-khenidak.mount
+```
 
 ## Basic software
 packages i use are in `./installed-packages`
