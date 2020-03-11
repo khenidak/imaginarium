@@ -28,3 +28,6 @@
 [submodule "box/.vim/bundles/vim-flake8"]
 	path = box/.vim/bundles/vim-flake8
 	url = https://github.com/nvie/vim-flake8.git
+[submodule "box/.vim/bundles/typescript-vim"]
+	path = box/.vim/bundles/typescript-vim
+	url = https://github.com/leafgarland/typescript-vim.git

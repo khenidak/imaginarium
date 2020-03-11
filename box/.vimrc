@@ -261,7 +261,8 @@ endfunction
 
 augroup AutoSyntastic
   autocmd!
-  autocmd BufWritePost *.c,*.cpp call s:syntastic()
+  "auto format c, cpp and typescript file
+  autocmd BufWritePost *.c,*.cpp,*.ts call s:syntastic()
 augroup END
 function! s:syntastic()
   SyntasticCheck
@@ -327,5 +328,23 @@ let python_highlight_all=1
 
 "let g:pymode_lint_ignore="E501,W601"
 "" Begin Functions
-nmap jj :%!python -m json.tool<CR> " use <jj> to format a json file
-nmap aa ggVG " select all using <aa>
+
+" format jason via `jj`
+nmap jj :%!python -m json.tool<CR>
+" select all via `aa`
+nmap aa ggVG
+
+
+
+" (( dotNET stuff ))
+" omnisharp rosyln server for auto complete *sigh*
+let g:OmniSharp_server_path = '/home/khenidak/bin/omnisharp/run'
+
+" for vim 8+ use stdio to talk to omnisharp server because it i async
+let g:OmniSharp_server_stdio = 1
+" fmt like 
+autocmd BufWritePre *.cs :OmniSharpCodeFormat
+
+" ******************* Type Script ***********
+autocmd BufRead,BufNewFile *.ts setlocal filetype=typescript tabstop=2
+au BufRead,BufNewFile *.ts  match BadWhitespace /\s\+$/
