@@ -13,6 +13,10 @@ shopt -s histappend
 eval $(ssh-agent)
 ssh-add ~/keys/xclusters #load xclusters key by default
 
+# add go to path
+export PATH=$PATH:/usr/local/go/bin
+
+
 
 # Stop and rm containers 
 nuke-docker-ps () { docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q) ;}
