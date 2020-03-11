@@ -943,7 +943,6 @@ netperf
 nettle-dev
 networkd-dispatcher
 nmap
-nodejs
 ntfs-3g
 ntpdate
 ntpstat
