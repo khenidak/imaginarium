@@ -116,7 +116,9 @@ build YouCompleteMe
 cd ~/.vim/bundles/YouCompleteMe/
 python3 install.py --all
 ```
-> check https://github.com/ycm-core/YouCompleteMe for more details about YCM
+
+> note: install .net if you are building for omnisharp, details here: https://docs.microsoft.com/en-us/dotnet/core/install/linux-package-manager-ubuntu-1804. Also check https://github.com/ycm-core/YouCompleteMe for more details about YCM
+
 ### additional software packages: nodejs etc
 
 -**nodejs**: I use a more modern `v 10.x` nodejs (for typescript). Follow instruction here: https://github.com/nodesource/distributions/blob/master/README.md
