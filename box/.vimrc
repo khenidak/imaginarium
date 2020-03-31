@@ -350,5 +350,5 @@ let g:OmniSharp_server_stdio = 1
 autocmd BufWritePre *.cs :OmniSharpCodeFormat
 
 " ******************* Type Script ***********
-autocmd BufRead,BufNewFile *.ts setlocal filetype=typescript tabstop=2
+autocmd BufRead,BufNewFile *.ts setlocal filetype=typescript tabstop=4 shiftwidth=4 expandtab
 au BufRead,BufNewFile *.ts  match BadWhitespace /\s\+$/

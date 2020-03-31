@@ -1,5 +1,6 @@
 #!/bin/bash
-
+# TODO: add function for retabing
+# $ find . -name '*.ts' -exec vim +"set tabstop=4 shiftwidth=4 expandtab | retab | wq" {} \;
 set -e 
 set -o pipefail
 
