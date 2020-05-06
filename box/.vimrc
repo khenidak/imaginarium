@@ -23,8 +23,9 @@ set nu
 set cursorline
 
 " set color /.vim/colors
-"colorscheme vividchalk
+" colorscheme vividchalk
 colorscheme Chasing_Logic
+" colorscheme borland
 "highlight search
 set hlsearch
 hi Search ctermbg=Yellow
@@ -60,7 +61,9 @@ let g:ctrlp_custom_ignore = {
   \ 'link': 'some_bad_symbolic_links',
   \ }
 
+let g:ctrlp_working_path_mode = 'ra'
 
+" *************** golang *****
 " Golang stuff (go-vim) 
 " use goimports for formatting
 "let g:go_fmt_command = "goimports"
@@ -358,3 +361,13 @@ autocmd BufWritePre *.cs :OmniSharpCodeFormat
 " ******************* Type Script ***********
 autocmd BufRead,BufNewFile *.ts setlocal filetype=typescript tabstop=4 shiftwidth=4 expandtab
 au BufRead,BufNewFile *.ts  match BadWhitespace /\s\+$/
+
+" ******************** rust *************
+let g:ycm_rust_src_path = '~/go/src/github.com/rust-lang/rust/src'
+let g:rustfmt_autosave = 1 
+" note some settings exist in rust-vim plugin
+
+" *ALL*
+nnoremap <Leader>] :YcmCompleter GoTo<CR>
+
+

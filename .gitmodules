@@ -31,3 +31,6 @@
 [submodule "box/.vim/bundles/typescript-vim"]
 	path = box/.vim/bundles/typescript-vim
 	url = https://github.com/leafgarland/typescript-vim.git
+[submodule "box/.vim/bundles/rust.vim"]
+	path = box/.vim/bundles/rust.vim
+	url = https://github.com/rust-lang/rust.vim.git
