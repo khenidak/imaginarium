@@ -23,8 +23,19 @@ nuke-docker-ps () { docker stop $(docker ps -a -q) && docker rm $(docker ps -a -
 nuke-docker-img () { docker rmi -f $(docker images -q) ;}
 iDev(){  tmux attach -t kal || tmux new -s kal; }
 sDev(){  tmux attach -t "$1" || tmux new -s "$1" ;}
+
 # configure PS1 the right way
-export PS1="${PS1:0:($((${#PS1}-3)))}\n$ "
+# if this is my main box, then just make it with a line break
+if [[ -f ~/~/imaginarium/box/main ]]; then
+  export PS1="${PS1:0:($((${#PS1}-3)))}\n$ "
+else
+  #\e[0;33
+  #\e[m
+  YELLOW='\[\033[1;33m\]'
+  NC='\[\033[0m\]'
+  BLUE='\[\033[1;34m\]'
+  export PS1="${YELLOW}\u@\h:${BLUE}\w${NC}\n$ "
+fi
 
 
 #python -c 'import sys, yaml, json; yaml.safe_dump(json.load(sys.stdin), sys.stdout, default_flow_style=False)' < vector_endpoints.json > vector_endpoints.yaml
@@ -77,7 +88,7 @@ function kubeswitch()
 	if [ -f $configFile ]; then
 			export KUBECONFIG="${configFile}"
 			echo "switched to ${KUBECONFIG}"
-  else
+	else
 			echo "File [$configFile] does not exist.."
 	fi
 }
