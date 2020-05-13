@@ -34,3 +34,6 @@
 [submodule "box/.vim/bundles/rust.vim"]
 	path = box/.vim/bundles/rust.vim
 	url = https://github.com/rust-lang/rust.vim.git
+[submodule "box/.vim/bundles/omnisharp-vim"]
+	path = box/.vim/bundles/omnisharp-vim
+	url = git://github.com/OmniSharp/omnisharp-vim

@@ -349,14 +349,6 @@ nmap aa ggVG
 
 
 
-" (( dotNET stuff ))
-" omnisharp rosyln server for auto complete *sigh*
-let g:OmniSharp_server_path = '/home/khenidak/bin/omnisharp/run'
-
-" for vim 8+ use stdio to talk to omnisharp server because it i async
-let g:OmniSharp_server_stdio = 1
-" fmt like 
-autocmd BufWritePre *.cs :OmniSharpCodeFormat
 
 " ******************* Type Script ***********
 autocmd BufRead,BufNewFile *.ts setlocal filetype=typescript tabstop=4 shiftwidth=4 expandtab
@@ -367,7 +359,16 @@ let g:ycm_rust_src_path = '~/go/src/github.com/rust-lang/rust/src'
 let g:rustfmt_autosave = 1 
 " note some settings exist in rust-vim plugin
 
+" ******************* C# ***********
+" omnisharp rosyln server for auto complete *sigh*
+ au BufRead,BufNewFile *.cs set tabstop=4
+let g:OmniSharp_server_path = '/home/khenidak/bin/omnisharp/run'
+
+" for vim 8+ use stdio to talk to omnisharp server because it i async
+let g:OmniSharp_server_stdio = 1
+" fmt like 
+autocmd BufWritePre *.cs :OmniSharpCodeFormat
+
 " *ALL*
 nnoremap <Leader>] :YcmCompleter GoTo<CR>
-
-
+nnoremap <Leader>$ :%!astyle<CR>
