@@ -3,8 +3,12 @@ scriptencoding utf-8
 
 " we are loading from a different path.
 " for some odd reason pathogen refuses to follow symbolic links
-set runtimepath+=~/home/khenidak/imaginarium/box/.vim/bundles
+set runtimepath+=/home/khenidak/imaginarium/box/.vim/
+
 execute pathogen#infect('bundles/{}')
+
+" kubernetes large files (looking at you validation) uses alot of mempatterns, default is 1k
+set mmp=5000
 
 syntax on
 filetype plugin indent on
@@ -25,11 +29,13 @@ set cursorline
 " set color /.vim/colors
 " colorscheme vividchalk
 colorscheme Chasing_Logic
+
 " colorscheme borland
 "highlight search
 set hlsearch
 hi Search ctermbg=Yellow
 hi Search ctermfg=Red
+
 "enter to exit highlight mode
 nnoremap <CR> :noh<CR><CR>
 
@@ -99,42 +105,6 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-" + javascript/typescript
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_eslint_exe = 'npm run lint --'
-let g:syntastic_typescript_checkers = ['eslint']
-let g:syntastic_typescript_eslint_exe = 'npm run lint --'
-
-" + GoLang
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-"let g:go_list_type = "quickfix"
-
-" json 
-let g:sytanstic_json_checker = ['json']
-let g:syntastic_javascript_checkers = ['javascript']
-
-
-" bash
-let g:syntastic_sh_checker = ['sh']
-
-" yaml
-let g:syntastic_yaml_checker = ['yaml']
-
-let g:syntastic_error_symbol = '❌'
-let g:syntastic_style_error_symbol = '⁉️'
-let g:syntastic_warning_symbol = '⚠️'
-let g:syntastic_style_warning_symbol = '💩'
-highlight link SyntasticErrorSign SignColumn
-highlight link SyntasticWarningSign SignColumn
-highlight link SyntasticStyleErrorSign SignColumn
-highlight link SyntasticStyleWarningSign SignColumn
-
 
 
 " lightline fix
@@ -160,7 +130,7 @@ let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ], ['ctrlpmark'] ],
-      \   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \   'right': [ [ 'lineinfo', 'percent' ], [ 'fileformat', 'fileencoding', 'filetype' ] ]
       \ },
       \ 'component_function': {
       \   'fugitive': 'LightlineFugitive',
@@ -170,12 +140,7 @@ let g:lightline = {
       \   'fileencoding': 'LightlineFileencoding',
       \   'mode': 'LightlineMode',
       \   'ctrlpmark': 'CtrlPMark',
-      \ },
-      \ 'component_expand': {
-      \   'syntastic': 'SyntasticStatuslineFlag',
-      \ },
-      \ 'component_type': {
-      \   'syntastic': 'error',
+      \   'gitbranch' : 'FugitiveHead',
       \ },
       \ 'subseparator': { 'left': '|', 'right': '|' }
       \ }
@@ -270,16 +235,6 @@ let g:tagbar_status_func = 'TagbarStatusFunc'
 function! TagbarStatusFunc(current, sort, fname, ...) abort
     let g:lightline.fname = a:fname
   return lightline#statusline(0)
-endfunction
-
-augroup AutoSyntastic
-  autocmd!
-  "auto format c, cpp and typescript file
-  autocmd BufWritePost *.c,*.cpp,*.ts call s:syntastic()
-augroup END
-function! s:syntastic()
-  SyntasticCheck
-  call lightline#update()
 endfunction
 
 let g:unite_force_overwrite_statusline = 0

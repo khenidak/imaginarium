@@ -37,7 +37,7 @@ create the following files
 Description=mount data disk
 
 [Mount]
-What=/dev/sdd
+What=/dev/disk/azure/scsi1/<FIND THE LUN IN DISKS VIEW>
 Where=/opt/data
 Type=ext4
 
@@ -51,7 +51,7 @@ WantedBy=multi-user.target
 Description=mount code disk
 
 [Mount]
-What=/dev/sdc
+What=/dev/disk/azure/scsi1/<FIND THE LUN IN DISKS VIEW>
 Where=/opt/code
 Type=ext4
 
@@ -60,13 +60,13 @@ WantedBy=multi-user.target
 ```
 Change user name as needed, don't forget to change the directory in `/opt`
 ```
-/etc/systemd/system/opt-code-home-khenidak.mount
+/etc/systemd/system/home-khenidak.mount
 [Unit]
 Description=bind home
 After=opt-code.mount
 [Mount]
-What=/home/khenidak
-Where=/opt/code/home/khenidak
+What=/opt/code/home/khenidak
+Where=/home/khenidak
 Type=none
 Options=bind
 
@@ -105,11 +105,25 @@ link tmux configuration file to what is in the imaginarium
 `ln -s ./imaginarium/box/.tmux.conf ./.tmux.conf`
 
 ### vi
-link the configuration file:
-`ln -s ./imaginarium/box/.vimrc ./.vimrc`
 
-link the plugin/theme director
-`ln -s ./imaginarium/box/.vim ./vim`
+The entire setup uses git submodules. You will need to perform after first pull
+
+```
+git submodule update --init --recursive
+```
+
+Like everything else these submodules may depend on other submodules (YCM does that) and also like everything else
+these submodules undergo updates and bug fixes so it is always a good idea to bring in the latest. Depending on your git config YMMV on how to bring the latest. This answer covers the details https://stackoverflow.com/questions/18770545/why-is-my-git-submodule-head-detached-from-master/55570998#55570998  
+
+TL;DR; submodules refs are on commits. When you use `git submodule update ..` you are bringing down the same refs (detached). To work around that use `git submodule update --remote --rebase` to ff your refs.
+
+add  the following to `~/.vimrc`
+
+`source /home/khenidak/imaginarium/box/.vimrc`
+
+In my setup i have empty .vimrc on home directory with just sourcing whatever
+i have in my imaginarium
+
 
 build YouCompleteMe
 ```

@@ -15,7 +15,8 @@ ssh-add ~/keys/xclusters #load xclusters key by default
 
 # add go to path
 export PATH=$PATH:/usr/local/go/bin
-
+# add rust path
+export PATH=$PATH:~/.cargo/bin
 
 
 # Stop and rm containers 
@@ -26,7 +27,7 @@ sDev(){  tmux attach -t "$1" || tmux new -s "$1" ;}
 
 # configure PS1 the right way
 # if this is my main box, then just make it with a line break
-if [[ -f ~/~/imaginarium/box/main ]]; then
+if [[ -f ~/imaginarium/box/is_main_box ]]; then
   export PS1="${PS1:0:($((${#PS1}-3)))}\n$ "
 else
   #\e[0;33
