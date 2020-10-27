@@ -6,6 +6,9 @@ scriptencoding utf-8
 set runtimepath+=~/home/khenidak/imaginarium/box/.vim/bundles
 execute pathogen#infect('bundles/{}')
 
+" kubernetes large files (looking at you validation) uses alot of mempatterns, default is 1k
+set mmp=5000
+
 syntax on
 filetype plugin indent on
 
