@@ -37,3 +37,6 @@
 [submodule "box/.vim/bundles/omnisharp-vim"]
 	path = box/.vim/bundles/omnisharp-vim
 	url = git://github.com/OmniSharp/omnisharp-vim
+[submodule "box/.vim/bundles/vim-fugitive"]
+	path = box/.vim/bundles/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive.git
